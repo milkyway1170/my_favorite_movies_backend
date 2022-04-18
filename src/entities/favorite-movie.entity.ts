@@ -1,4 +1,5 @@
-import {Entity, PrimaryColumn, Column, BaseEntity} from "typeorm";
+import {Entity, PrimaryColumn, Column, BaseEntity, OneToOne} from "typeorm";
+import { User } from "./user.entity";
 
 @Entity()
 export class FavoriteMovie extends BaseEntity {
@@ -8,4 +9,7 @@ export class FavoriteMovie extends BaseEntity {
 
     @Column("int", { array: true })
     movieId: number[];
+
+    @OneToOne(() => User, user => user.movieList) 
+    user: User;
 }

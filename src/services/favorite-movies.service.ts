@@ -15,8 +15,8 @@ export class MovieService {
     return this.moviesIdRepository.find();
   }
 
-  findOne(userId: number): Promise<FavoriteMovie> {
-    return this.moviesIdRepository.findOne(userId);
+  findOne(movieId: number): Promise<FavoriteMovie> {
+    return this.moviesIdRepository.findOne(movieId);
   }
 
   async remove(userId: number): Promise<void> {
