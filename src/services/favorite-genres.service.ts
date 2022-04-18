@@ -8,19 +8,19 @@ import { Repository } from 'typeorm';
 export class MovieService {
   constructor(
     @InjectRepository(FavoriteGenre)
-    private usersRepository: Repository<FavoriteGenre>,
+    private genresIdRepository: Repository<FavoriteGenre>,
   ) {}
 
   findAll(): Promise<FavoriteGenre[]> {
-    return this.usersRepository.find();
+    return this.genresIdRepository.find();
   }
 
   findOne(userId: number): Promise<FavoriteGenre> {
-    return this.usersRepository.findOne(userId);
+    return this.genresIdRepository.findOne(userId);
   }
 
   async remove(userId: number): Promise<void> {
-    await this.usersRepository.delete(userId);
+    await this.genresIdRepository.delete(userId);
   }
   
   async add(genreListData:IGenreId): Promise<void> {
