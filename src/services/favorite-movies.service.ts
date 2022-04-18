@@ -1,0 +1,33 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FavoriteMovie } from 'src/entities/favorite-movie.entity';
+import { IMovieId } from 'src/types/movie-id.interface';
+import { Repository } from 'typeorm';
+
+@Injectable()
+export class MovieService {
+  constructor(
+    @InjectRepository(FavoriteMovie)
+    private usersRepository: Repository<FavoriteMovie>,
+  ) {}
+
+  findAll(): Promise<FavoriteMovie[]> {
+    return this.usersRepository.find();
+  }
+
+  findOne(userId: number): Promise<FavoriteMovie> {
+    return this.usersRepository.findOne(userId);
+  }
+
+  async remove(userId: number): Promise<void> {
+    await this.usersRepository.delete(userId);
+  }
+  
+  async add(movieListData:IMovieId): Promise<void> {
+    const movieList = new FavoriteMovie();
+    movieList.userId = movieListData.userId;
+    movieList.movieId = movieListData.movieId;
+    
+    await movieList.save();
+  }
+}
