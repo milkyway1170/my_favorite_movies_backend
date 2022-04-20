@@ -19,11 +19,11 @@ export class GenreService {
     return this.favoriteGenresIdRepository.findOne(genreId);
   }
 
-  async remove(userId: string): Promise<void> {
-    await this.favoriteGenresIdRepository.delete(userId);
+  async remove(genreId: string): Promise<void> {
+    await this.favoriteGenresIdRepository.delete(genreId);
   }
 
-  async add({ userId, genreId }: IGenreId): Promise<void> {
+  async add(genreId: number): Promise<void> {
     const genreList = new FavoriteGenre();
     genreList.genreId = genreId;
 

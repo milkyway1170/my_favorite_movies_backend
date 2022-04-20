@@ -19,11 +19,11 @@ export class MovieService {
     return this.favoriteMoviesIdRepository.findOne(movieId);
   }
 
-  async remove(userId: string): Promise<void> {
-    await this.favoriteMoviesIdRepository.delete(userId);
+  async remove(movieId: string): Promise<void> {
+    await this.favoriteMoviesIdRepository.delete(movieId);
   }
 
-  async add({ userId, movieId }: IMovieId): Promise<void> {
+  async add(movieId: number): Promise<void> {
     const movieList = new FavoriteMovie();
     movieList.movieId = movieId;
 
