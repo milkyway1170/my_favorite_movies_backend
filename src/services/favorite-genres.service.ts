@@ -5,29 +5,28 @@ import { IGenreId } from 'src/types/genre-id.interface';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class MovieService {
+export class GenreService {
   constructor(
     @InjectRepository(FavoriteGenre)
-    private genresIdRepository: Repository<FavoriteGenre>,
+    private favoriteGenresIdRepository: Repository<FavoriteGenre>,
   ) {}
 
   findAll(): Promise<FavoriteGenre[]> {
-    return this.genresIdRepository.find();
+    return this.favoriteGenresIdRepository.find();
   }
 
-  findOne(genreId: number): Promise<FavoriteGenre> {
-    return this.genresIdRepository.findOne(genreId);
+  findOne(genreId: string): Promise<FavoriteGenre> {
+    return this.favoriteGenresIdRepository.findOne(genreId);
   }
 
-  async remove(userId: number): Promise<void> {
-    await this.genresIdRepository.delete(userId);
+  async remove(userId: string): Promise<void> {
+    await this.favoriteGenresIdRepository.delete(userId);
   }
-  
-  async add(genreListData:IGenreId): Promise<void> {
+
+  async add({ userId, genreId }: IGenreId): Promise<void> {
     const genreList = new FavoriteGenre();
-    genreList.userId = genreListData.userId;
-    genreList.genreId = genreListData.genreId;
-    
+    genreList.genreId = genreId;
+
     await genreList.save();
   }
 }

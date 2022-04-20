@@ -8,26 +8,25 @@ import { Repository } from 'typeorm';
 export class MovieService {
   constructor(
     @InjectRepository(FavoriteMovie)
-    private moviesIdRepository: Repository<FavoriteMovie>,
+    private favoriteMoviesIdRepository: Repository<FavoriteMovie>,
   ) {}
 
   findAll(): Promise<FavoriteMovie[]> {
-    return this.moviesIdRepository.find();
+    return this.favoriteMoviesIdRepository.find();
   }
 
-  findOne(movieId: number): Promise<FavoriteMovie> {
-    return this.moviesIdRepository.findOne(movieId);
+  findOne(movieId: string): Promise<FavoriteMovie> {
+    return this.favoriteMoviesIdRepository.findOne(movieId);
   }
 
-  async remove(userId: number): Promise<void> {
-    await this.moviesIdRepository.delete(userId);
+  async remove(userId: string): Promise<void> {
+    await this.favoriteMoviesIdRepository.delete(userId);
   }
-  
-  async add(movieListData:IMovieId): Promise<void> {
+
+  async add({ userId, movieId }: IMovieId): Promise<void> {
     const movieList = new FavoriteMovie();
-    movieList.userId = movieListData.userId;
-    movieList.movieId = movieListData.movieId;
-    
+    movieList.movieId = movieId;
+
     await movieList.save();
   }
 }

@@ -15,20 +15,22 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(userId: number): Promise<User> {
+  findOne(userId: string): Promise<User> {
     return this.usersRepository.findOne(userId);
   }
 
-  async remove(userId: number): Promise<void> {
+  async remove(userId: string): Promise<void> {
     await this.usersRepository.delete(userId);
   }
-  
-  async add(userData : IUser): Promise<void> {
-    const user = new User();
-    user.userId = userData.userId;
-    user.login = userData.login.trim();
-    user.password = userData.password.trim();
-    
-    await user.save();
+
+  async add({ userId, login, password }: IUser): Promise<void> {
+    if (!this.findOne(userId)) {
+      const user = new User();
+      user.id = userId;
+      user.login = login.trim();
+      user.password = password.trim();
+
+      await user.save();
+    }
   }
 }

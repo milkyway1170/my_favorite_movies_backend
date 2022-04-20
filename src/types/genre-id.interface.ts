@@ -1,4 +1,4 @@
 export interface IGenreId {
-  userId: number;
-  genreId: number[];
+  userId: string;
+  genreId: number;
 }

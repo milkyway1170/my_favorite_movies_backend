@@ -1,15 +1,21 @@
-import {Entity, Column, PrimaryColumn, BaseEntity, JoinColumn, OneToOne} from "typeorm";
-import { User } from "./user.entity";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+} from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class FavoriteGenre extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryColumn()
-    userId: number;
+  @Column()
+  genreId: number;
 
-    @Column("int", { array: true })
-    genreId: number[];
-
-    @OneToOne(() => User, user => user.genreList) 
-    user: User;
+  @ManyToOne(() => User, (user) => user.genreList)
+  user: User;
 }

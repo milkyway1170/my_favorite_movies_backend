@@ -1,24 +1,30 @@
-import {Entity, Column, PrimaryColumn, BaseEntity, OneToOne, JoinColumn} from "typeorm";
-import { FavoriteGenre } from "./favorite-genre.entity";
-import { FavoriteMovie } from "./favorite-movie.entity";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from 'typeorm';
+import { FavoriteGenre } from './favorite-genre.entity';
+import { FavoriteMovie } from './favorite-movie.entity';
 
 @Entity()
 export class User extends BaseEntity {
-    
-    @PrimaryColumn()
-    userId: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    login: string;
+  @Column({ unique: true })
+  login: string;
 
-    @Column()
-    password: string;
-    
-    @OneToOne(() => FavoriteMovie, movieList => movieList.user)
-    @JoinColumn()
-    movieList: FavoriteMovie;
+  @Column()
+  password: string;
 
-    @OneToOne(() => FavoriteGenre, genreList => genreList.user)
-    @JoinColumn()
-    genreList: FavoriteGenre;
-}       
+  @OneToMany(() => FavoriteMovie, (movieList) => movieList.user)
+  @JoinColumn()
+  movieList: FavoriteMovie;
+
+  @OneToMany(() => FavoriteGenre, (genreList) => genreList.user)
+  @JoinColumn()
+  genreList: FavoriteGenre;
+}

@@ -7,7 +7,7 @@ import { User } from './entities/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    TypeOrmModule.forFeature([User, FavoriteMovie, FavoriteGenre])
+    TypeOrmModule.forFeature([User, FavoriteMovie, FavoriteGenre]),
   ],
   providers: [],
 })
