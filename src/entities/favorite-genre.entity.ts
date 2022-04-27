@@ -2,7 +2,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
   Column,
-  PrimaryColumn,
   BaseEntity,
   PrimaryGeneratedColumn,
   ManyToOne,
