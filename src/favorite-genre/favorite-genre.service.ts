@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FavoriteGenre } from 'src/entities/favorite-genre.entity';
-import { IGenreId } from 'src/types/genre-id.interface';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class GenreService {
+export class FavoriteGenreService {
   constructor(
     @InjectRepository(FavoriteGenre)
     private favoriteGenresIdRepository: Repository<FavoriteGenre>,
@@ -15,18 +14,19 @@ export class GenreService {
     return this.favoriteGenresIdRepository.find();
   }
 
-  findOne(genreId: string): Promise<FavoriteGenre> {
+  findOne(genreId: number): Promise<FavoriteGenre> {
     return this.favoriteGenresIdRepository.findOne(genreId);
   }
 
-  async remove(genreId: string): Promise<void> {
+  async remove(genreId: number): Promise<void> {
     await this.favoriteGenresIdRepository.delete(genreId);
   }
 
-  async add(genreId: number): Promise<void> {
+  async add(genreId: number, userId: string): Promise<FavoriteGenre> {
     const genreList = new FavoriteGenre();
     genreList.genreId = genreId;
+    genreList.userId = userId;
 
-    await genreList.save();
+    return await genreList.save();
   }
 }

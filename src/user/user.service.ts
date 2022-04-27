@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
-import { IUser } from 'src/types/user.interface';
 import { Repository } from 'typeorm';
+import { NewUserInput } from './dto/new-user.input';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
@@ -15,22 +15,25 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(userId: string): Promise<User> {
-    return this.usersRepository.findOne(userId);
+  findById(userId: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { id: userId } });
+  }
+
+  findByLogin(login: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { login: login } });
   }
 
   async remove(userId: string): Promise<void> {
     await this.usersRepository.delete(userId);
   }
 
-  async add({ userId, login, password }: IUser): Promise<void> {
-    if (!this.findOne(userId)) {
+  async add({ login, password }: NewUserInput): Promise<User> {
+    const isLogin = await this.findByLogin(login);
+    if (typeof isLogin === 'undefined') {
       const user = new User();
-      user.id = userId;
       user.login = login.trim();
       user.password = password.trim();
-
-      await user.save();
+      return await user.save();
     }
   }
 }

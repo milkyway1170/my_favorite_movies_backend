@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
-import { IGetMoviesList } from 'src/types/filter.interface';
+import { FilterSettingInput } from './dto/get-movie-list.input';
 
 @Injectable()
 export class FilterService {
@@ -13,7 +13,7 @@ export class FilterService {
     page,
     rating,
     genres,
-  }: IGetMoviesList): Observable<AxiosResponse<object>> {
+  }: FilterSettingInput): Observable<AxiosResponse<object>> {
     let filterUrlPart = '';
     if (page) {
       filterUrlPart += '&page=' + page.toString();

@@ -11,8 +11,13 @@ export class CreateFavoriteGenres1650446406646 implements MigrationInterface {
         default: 'uuid_generate_v4()',
       },
       {
+        name: 'user_id',
+        type: 'uuid',
+        isNullable: false,
+      },
+      {
         name: 'genre_id',
-        type: 'number',
+        type: 'integer',
         isNullable: false,
       },
     ],

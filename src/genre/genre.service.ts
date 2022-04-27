@@ -4,15 +4,13 @@ import { map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 
 @Injectable()
-export class MovieService {
+export class GenreService {
   constructor(private httpService: HttpService) {}
 
-  getMoviesList(movieId: number): Observable<AxiosResponse<object>> {
+  getGenres(): Observable<AxiosResponse<object>> {
     return this.httpService
       .get(
-        (process.env.API_GET_MOVIE_DATA ?? '') +
-          movieId.toString() +
-          '?api_key=' +
+        (process.env.API_GET_GENRES ?? '') +
           (process.env.API_KEY ?? '') +
           '&language=en-US',
       )

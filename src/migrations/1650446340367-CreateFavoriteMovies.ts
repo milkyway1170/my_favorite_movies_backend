@@ -11,8 +11,13 @@ export class CreateFavoriteMovies1650446340367 implements MigrationInterface {
         default: 'uuid_generate_v4()',
       },
       {
+        name: 'user_id',
+        type: 'uuid',
+        isNullable: false,
+      },
+      {
         name: 'movie_id',
-        type: 'number',
+        type: 'integer',
         isNullable: false,
       },
     ],
