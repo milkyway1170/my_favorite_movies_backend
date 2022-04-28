@@ -25,7 +25,7 @@ export class FavoriteGenreService {
   }
 
   async remove(genreId: number): Promise<void> {
-    await this.favoriteGenresIdRepository.delete(genreId);
+    await this.favoriteGenresIdRepository.delete({ genreId: genreId });
   }
 
   async add(genreId: number, userId: string): Promise<FavoriteGenre> {
