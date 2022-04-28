@@ -1,0 +1,53 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FavoriteMovie {
+  id: String!
+  userId: String!
+  movieId: Float!
+}
+
+type User {
+  id: String!
+  login: String!
+  password: String!
+}
+
+type FavoriteGenre {
+  id: String!
+  userId: String!
+  genreId: Float!
+}
+
+type Query {
+  getPoster(posterPath: String!): String!
+  getMovieData(movieId: Float!): String!
+  getGenres: String!
+  getMoviesList(filterSetting: FilterSettingInput!): String!
+  user(id: String!): User!
+  getUserId(login: String!): User!
+  users: [User!]!
+  favoriteGenre(genreId: Float!): FavoriteGenre!
+  favoriteGenres: [FavoriteGenre!]!
+}
+
+input FilterSettingInput {
+  page: Float!
+  year: Float!
+  rating: Float!
+  genres: [String!]!
+}
+
+type Mutation {
+  addUser(newUser: NewUserInput!): User!
+  removeFavoriteMovie(movieId: Float!): Boolean!
+  addFavoriteMovie(newFavoriteMovie: Float!, userId: String!): FavoriteMovie!
+  removeFavoriteGenre(genreId: Float!): Boolean!
+  addFavoriteGenre(newFavoriteGenre: Float!, userId: String!): FavoriteGenre!
+}
+
+input NewUserInput {
+  login: String!
+  password: String!
+}
