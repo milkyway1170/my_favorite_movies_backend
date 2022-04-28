@@ -1,4 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
+
 import { MovieService } from 'src/movie/movie.service';
 
 @Resolver()
@@ -7,7 +8,6 @@ export class MovieResolver {
 
   @Query((returns) => String)
   async getMovieData(@Args('movieId') movieId: number) {
-    const movieData = await this.movieService.getMovieData(movieId);
-    return movieData;
+    return this.movieService.getMovieData(movieId);
   }
 }

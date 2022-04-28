@@ -1,4 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
+
 import { PosterService } from 'src/poster/poster.service';
 
 @Resolver()
@@ -7,7 +8,6 @@ export class PosterResolver {
 
   @Query((returns) => String)
   async getPoster(@Args('posterPath') posterPath: string) {
-    const path = await this.posterService.getPoster(posterPath);
-    return path;
+    return this.posterService.getPoster(posterPath);
   }
 }

@@ -13,6 +13,6 @@ export class FilterSettingInput {
   rating?: number;
 
   @Type(() => String)
-  @Field((type) => [String])
+  @Field(() => [String])
   genres?: string[];
 }

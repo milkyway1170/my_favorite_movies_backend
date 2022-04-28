@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { NewUserInput } from './dto/new-user.input';
+
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -16,20 +17,28 @@ export class UserService {
   }
 
   findById(userId: string): Promise<User> {
-    return this.usersRepository.findOne({ where: { id: userId } });
+    const user = this.usersRepository.findOne({ id: userId });
+    if (!user) {
+      throw new NotFoundException(userId);
+    }
+    return user;
   }
 
   findByLogin(login: string): Promise<User> {
-    return this.usersRepository.findOne({ where: { login: login } });
+    const user = this.usersRepository.findOne({ login });
+    if (!user) {
+      throw new NotFoundException(login);
+    }
+    return user;
   }
 
   async remove(userId: string): Promise<void> {
     await this.usersRepository.delete(userId);
   }
 
-  async add({ login, password }: NewUserInput): Promise<User> {
+  async createUser({ login, password }: NewUserInput): Promise<User> {
     const isLogin = await this.findByLogin(login);
-    if (typeof isLogin === 'undefined') {
+    if (!isLogin) {
       const user = new User();
       user.login = login.trim();
       user.password = password.trim();

@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
 } from 'typeorm';
+
 import { FavoriteGenre } from './favorite-genre.entity';
 import { FavoriteMovie } from './favorite-movie.entity';
 

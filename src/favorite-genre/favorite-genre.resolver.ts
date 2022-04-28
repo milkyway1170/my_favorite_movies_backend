@@ -1,5 +1,5 @@
-import { NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+
 import { FavoriteGenre } from 'src/entities/favorite-genre.entity';
 import { FavoriteGenreService } from 'src/favorite-genre/favorite-genre.service';
 
@@ -11,11 +11,7 @@ export class FavoriteGenreResolver {
   async favoriteGenre(
     @Args('genreId') genreId: number,
   ): Promise<FavoriteGenre> {
-    const favoriteGenre = await this.favoriteGenreService.findOne(genreId);
-    if (!favoriteGenre) {
-      throw new NotFoundException(genreId);
-    }
-    return favoriteGenre;
+    return this.favoriteGenreService.findOne(genreId);
   }
 
   @Query((returns) => [FavoriteGenre])
@@ -33,10 +29,6 @@ export class FavoriteGenreResolver {
     @Args('newFavoriteGenre') newFavoriteGenre: number,
     @Args('userId') userId: string,
   ): Promise<FavoriteGenre> {
-    const favoriteGenre = await this.favoriteGenreService.add(
-      newFavoriteGenre,
-      userId,
-    );
-    return favoriteGenre;
+    return this.favoriteGenreService.add(newFavoriteGenre, userId);
   }
 }

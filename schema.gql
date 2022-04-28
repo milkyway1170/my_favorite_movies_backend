@@ -40,7 +40,6 @@ input FilterSettingInput {
 }
 
 type Mutation {
-  removeUser(id: String!): Boolean!
   addUser(newUser: NewUserInput!): User!
   removeFavoriteMovie(movieId: Float!): Boolean!
   addFavoriteMovie(newFavoriteMovie: Float!, userId: String!): FavoriteMovie!

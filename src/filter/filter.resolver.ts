@@ -1,4 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
+
 import { FilterService } from 'src/filter/filter.service';
 import { FilterSettingInput } from './dto/get-movie-list.input';
 
@@ -10,7 +11,6 @@ export class FilterResolver {
   async getMoviesList(
     @Args('filterSetting') filterSetting: FilterSettingInput,
   ) {
-    const filterData = await this.filterService.getMoviesList(filterSetting);
-    return filterData;
+    return this.filterService.getMoviesList(filterSetting);
   }
 }

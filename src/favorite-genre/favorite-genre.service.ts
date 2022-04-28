@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FavoriteGenre } from 'src/entities/favorite-genre.entity';
 import { Repository } from 'typeorm';
+import { NotFoundException } from '@nestjs/common';
+
+import { FavoriteGenre } from 'src/entities/favorite-genre.entity';
 
 @Injectable()
 export class FavoriteGenreService {
@@ -15,7 +17,11 @@ export class FavoriteGenreService {
   }
 
   findOne(genreId: number): Promise<FavoriteGenre> {
-    return this.favoriteGenresIdRepository.findOne(genreId);
+    const favoriteGenre = this.favoriteGenresIdRepository.findOne({ genreId });
+    if (!favoriteGenre) {
+      throw new NotFoundException(genreId);
+    }
+    return favoriteGenre;
   }
 
   async remove(genreId: number): Promise<void> {

@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
-import { map, Observable } from 'rxjs';
+import { HttpException, Injectable } from '@nestjs/common';
+import { catchError, map, Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 
 @Injectable()
@@ -17,6 +17,9 @@ export class GenreService {
       .pipe(
         map((axiosResponse: AxiosResponse) => {
           return axiosResponse.data;
+        }),
+        catchError((e) => {
+          throw new HttpException(e.response.data, e.response.status);
         }),
       );
   }
