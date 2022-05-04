@@ -2,6 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Sign } from 'crypto';
 
 import { FavoriteGenre } from './entities/favorite-genre.entity';
 import { FavoriteMovie } from './entities/favorite-movie.entity';
@@ -21,6 +22,7 @@ import { UserModule } from './user/user.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: false,
+      playground: false,
       autoSchemaFile: 'schema.gql',
     }),
     PosterModule,

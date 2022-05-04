@@ -1,8 +1,7 @@
-import { Injectable, NotFoundException, UseGuards } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NewUserInput } from './dto/new-user.input';
-import { GqlAuthGuard } from 'src/guard/gql-auth-guard';
 
 import { User } from 'src/entities/user.entity';
 
@@ -37,7 +36,6 @@ export class UserService {
     await this.usersRepository.delete(userId);
   }
 
-  @UseGuards(GqlAuthGuard)
   async createUser({ login, password }: NewUserInput): Promise<User> {
     const isLogin = await this.findByLogin(login);
     if (!isLogin) {
