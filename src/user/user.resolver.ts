@@ -1,7 +1,8 @@
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { User } from 'src/entities/user.entity';
+import { GqlAuthGuard } from 'src/guard/gql-auth-guard';
 import { UserService } from 'src/user/user.service';
 import { NewUserInput } from './dto/new-user.input';
 
@@ -24,6 +25,7 @@ export class UserResolver {
     return this.userService.findAll();
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation((returns) => User)
   async addUser(@Args('newUser') newUser: NewUserInput): Promise<User> {
     return this.userService.createUser(newUser);
