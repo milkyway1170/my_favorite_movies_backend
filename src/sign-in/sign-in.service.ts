@@ -15,12 +15,9 @@ export default class SignInService {
   ) {}
 
   async process(userData: SignInRequest): Promise<AuthResponse> {
-    const {
-      id,
-      login,
-      password,
-    }: { id: string; login: string; password: string } =
-      await this.userService.findByLogin(userData.login.trim());
+    const { id, login, password } = await this.userService.findByLogin(
+      userData.login.trim(),
+    );
 
     const payload = {
       id,
