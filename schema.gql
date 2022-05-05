@@ -20,14 +20,24 @@ type FavoriteGenre {
   genreId: Float!
 }
 
+type JwtPayload {
+  id: String!
+  login: String!
+}
+
+type AuthResponse {
+  token: String!
+  user: JwtPayload!
+}
+
 type Query {
+  user(id: String!): User!
+  getUserId(login: String!): User!
+  users: [User!]!
   getPoster(posterPath: String!): String!
   getMovieData(movieId: Float!): String!
   getGenres: String!
   getMoviesList(filterSetting: FilterSettingInput!): String!
-  user(id: String!): User!
-  getUserId(login: String!): User!
-  users: [User!]!
   favoriteGenre(genreId: Float!): FavoriteGenre!
   favoriteGenres: [FavoriteGenre!]!
 }
@@ -41,6 +51,7 @@ input FilterSettingInput {
 
 type Mutation {
   addUser(newUser: NewUserInput!): User!
+  signIn(userData: SignInRequest!): AuthResponse!
   removeFavoriteMovie(movieId: Float!): Boolean!
   addFavoriteMovie(newFavoriteMovie: Float!, userId: String!): FavoriteMovie!
   removeFavoriteGenre(genreId: Float!): Boolean!
@@ -48,6 +59,11 @@ type Mutation {
 }
 
 input NewUserInput {
+  login: String!
+  password: String!
+}
+
+input SignInRequest {
   login: String!
   password: String!
 }

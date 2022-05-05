@@ -1,8 +1,8 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Sign } from 'crypto';
 
 import { FavoriteGenre } from './entities/favorite-genre.entity';
 import { FavoriteMovie } from './entities/favorite-movie.entity';
@@ -13,6 +13,7 @@ import { FilterModule } from './filter/filter.module';
 import { GenreModule } from './genre/genre.module';
 import { MovieModule } from './movie/movie.module';
 import { PosterModule } from './poster/poster.module';
+import { SignInModule } from './sign-in/sign-in.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -22,14 +23,14 @@ import { UserModule } from './user/user.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: false,
-      playground: false,
       autoSchemaFile: 'schema.gql',
     }),
+    UserModule,
+    SignInModule,
     PosterModule,
     MovieModule,
     GenreModule,
     FilterModule,
-    UserModule,
     FavoriteMovieModule,
     FavoriteGenreModule,
   ],

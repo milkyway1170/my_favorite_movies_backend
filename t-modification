@@ -1,0 +1,157 @@
+[33mcommit ef4d08e5fa21aa1f3bb5c8234a1756c2c819aa81[m[33m ([m[1;36mHEAD -> [m[1;32mlast-modifications[m[33m, [m[1;31morigin/jwt[m[33m, [m[1;32mjwt[m[33m)[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 28 16:38:21 2022 +0300
+
+    Added authorization
+
+[33mcommit 6bd1a268e528a812b75118c5750976ea69f51d32[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 28 13:17:05 2022 +0300
+
+    Installed JWT
+
+[33mcommit 832e5c6da051d679d96f895323986884738c7791[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 28 13:13:26 2022 +0300
+
+    Installed Passport.
+
+[33mcommit 10f36d3f451f360817286cbbd10a4ec975e5dbe0[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 11b2283 14a578a
+Author: Vladislav <75331506+milkyway1170@users.noreply.github.com>
+Date:   Thu Apr 28 12:09:28 2022 +0300
+
+    Merge pull request #6 from milkyway1170/add-graphql
+    
+    Add graphql
+
+[33mcommit 14a578a5c02af0bd1eeba8c945fe6410c4e175d4[m[33m ([m[1;31morigin/add-graphql[m[33m, [m[1;32madd-graphql[m[33m)[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 28 11:49:04 2022 +0300
+
+    Removed useless variables, edited condition in createUser().
+
+[33mcommit 6afec93f383947d1bca97cbf83b54cad75718ab8[m
+Merge: 4d5ea33 11b2283
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 27 13:52:12 2022 +0300
+
+    Edited package-lock and package
+
+[33mcommit 4d5ea33a48d655e01334a79da69a5e00d8e245a7[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 27 13:42:46 2022 +0300
+
+    Added GraphQL
+
+[33mcommit 32a510ad1c738b0a6159e0dacc7f121dd0a7f002[m[33m ([m[1;31morigin/graphql[m[33m, [m[1;32mgraphql[m[33m)[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 27 13:17:29 2022 +0300
+
+    Fixed conflicts
+
+[33mcommit 876419cc8a7b74e27d5cdbca85a695362dbdebb7[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 27 13:08:22 2022 +0300
+
+    Added GraphQL
+
+[33mcommit 2af43917d6acc1044971aa1ae21ac9dc7627efd6[m[33m ([m[1;32mservices-for-movie-db[m[33m)[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 27 12:59:39 2022 +0300
+
+    Added GrahpQL
+
+[33mcommit 11b2283982be4d553adf9880c2ee538224fb44e4[m
+Author: Vladislav <75331506+milkyway1170@users.noreply.github.com>
+Date:   Thu Apr 21 12:55:32 2022 +0300
+
+    Added services for Movie DB (#3)
+    
+    * Added services for Movie DB
+    
+    * Deleted controler's folder.
+
+[33mcommit 68f5f75d2868f754c27fa20baa1eaf7bbf465e61[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 21 12:05:36 2022 +0300
+
+    Deleted controler's folder.
+
+[33mcommit 1d3adf8970ffa0d404dd32a3b9a60ef6ded94fa9[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 21 10:58:50 2022 +0300
+
+    Added services for Movie DB
+
+[33mcommit 21d6e5bc271d9e9b68a6b1e9e1859ea888de889d[m
+Merge: 04fd489 af13aba
+Author: Vladislav <75331506+milkyway1170@users.noreply.github.com>
+Date:   Thu Apr 21 10:53:41 2022 +0300
+
+    Merge pull request #2 from milkyway1170/database-update
+    
+    Database update
+
+[33mcommit af13aba36db2b48fe00f91fd70108e3183a3708d[m[33m ([m[1;32mdatabase-update[m[33m)[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 20 12:26:08 2022 +0300
+
+    Destructed migration
+
+[33mcommit 83cb490a4c7da1722c38c6919d13c86afe8eda89[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Wed Apr 20 12:01:03 2022 +0300
+
+    Deleted userId column, changed type of relations.
+
+[33mcommit ecfc787998e60fa0d4318ca0bd1d153f2aa23848[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Mon Apr 18 17:04:33 2022 +0300
+
+    Added relations
+
+[33mcommit 9fbd6720d0cbc4f876d845c07b37aa1b4bb9bf96[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Mon Apr 18 13:06:09 2022 +0300
+
+    Edited moviesIdRepository and genresIdRepository
+
+[33mcommit ec9e366914893a5cdb7abbffabdc4d45a54c7ddc[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Mon Apr 18 11:37:01 2022 +0300
+
+    Added migration, basic services and entities
+
+[33mcommit 3d29d2f6a793e27907e43f2132723a76f053c5be[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 14 13:53:26 2022 +0300
+
+    Add TypeORM
+
+[33mcommit 17bcd679340433656c8610573a8f45b878b8ebf2[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Thu Apr 14 12:04:16 2022 +0300
+
+    Tamplate
+
+[33mcommit 04fd48933aaa3913f91c8323d7f1a91d0d46baa0[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 4fccbe9 43ea606
+Author: Andrey Reshetov <andr.reshetov@gmail.com>
+Date:   Mon Apr 11 15:39:57 2022 +0300
+
+    Merge pull request #1 from milkyway1170/app-template
+    
+    Template
+
+[33mcommit 43ea606f98b2afaf87b11b5069902d693d688f5d[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Mon Apr 11 15:26:46 2022 +0300
+
+    Template
+
+[33mcommit 4fccbe9ecf2f5b66d107c40725e689460f0a503f[m
+Author: Владислав Бублик <bublik1170@gmail.com>
+Date:   Mon Apr 11 15:25:16 2022 +0300
+
+    first commit

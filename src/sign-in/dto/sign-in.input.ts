@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
 @InputType()
 export class SignInRequest {
@@ -9,12 +9,19 @@ export class SignInRequest {
   password: string;
 }
 
-export interface JwtPayload {
+@ObjectType()
+export class JwtPayload {
+  @Field()
   id: string;
+  @Field()
   login: string;
 }
 
-export interface AuthResponse {
+@ObjectType()
+export class AuthResponse {
+  @Field()
   token: string;
+
+  @Field()
   user: JwtPayload;
 }
