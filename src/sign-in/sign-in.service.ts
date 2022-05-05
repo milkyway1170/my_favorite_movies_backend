@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from 'src/entities/user.entity';
@@ -15,14 +15,18 @@ export default class SignInService {
   ) {}
 
   async process(userData: SignInRequest): Promise<AuthResponse> {
-    this.user = await this.userService.findByLogin(userData.login.trim());
+    const {
+      id,
+      login,
+      password,
+    }: { id: string; login: string; password: string } =
+      await this.userService.findByLogin(userData.login.trim());
 
-    if (this.user && userData.password == this.user.password) {
-      const payload = {
-        id: this.user.id,
-        login: this.user.login,
-      };
-
+    const payload = {
+      id,
+      login,
+    };
+    if (login && userData.password === password) {
       return {
         token: this.jwtService.sign({
           ...payload,
@@ -30,7 +34,7 @@ export default class SignInService {
         user: payload,
       };
     } else {
-      return undefined;
+      throw new NotFoundException('Wrong credentials');
     }
   }
 }
