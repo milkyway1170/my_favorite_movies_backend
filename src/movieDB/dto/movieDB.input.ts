@@ -16,3 +16,19 @@ export class FilterSettingInput {
   @Field(() => [String])
   genres?: string[];
 }
+
+@InputType()
+export class SettingInput {
+  @Field()
+  page: number;
+
+  @Field()
+  year: number;
+
+  @Field()
+  rating: number;
+
+  @Type(() => String)
+  @Field(() => [String])
+  genres: string[];
+}

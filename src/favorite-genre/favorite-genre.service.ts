@@ -12,8 +12,8 @@ export class FavoriteGenreService {
     private favoriteGenresIdRepository: Repository<FavoriteGenre>,
   ) {}
 
-  findAll(): Promise<FavoriteGenre[]> {
-    return this.favoriteGenresIdRepository.find();
+  findAll(userId: string): Promise<FavoriteGenre[]> {
+    return this.favoriteGenresIdRepository.find({ userId: userId });
   }
 
   findOne(genreId: number): Promise<FavoriteGenre> {
@@ -24,8 +24,11 @@ export class FavoriteGenreService {
     return favoriteGenre;
   }
 
-  async remove(genreId: number): Promise<void> {
-    await this.favoriteGenresIdRepository.delete({ genreId: genreId });
+  async remove(genreId: number, userId: string): Promise<void> {
+    await this.favoriteGenresIdRepository.delete({
+      genreId: genreId,
+      userId: userId,
+    });
   }
 
   async add(genreId: number, userId: string): Promise<FavoriteGenre> {

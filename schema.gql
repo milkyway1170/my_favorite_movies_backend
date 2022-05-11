@@ -30,19 +30,32 @@ type AuthResponse {
   user: JwtPayload!
 }
 
-type Query {
-  user(id: String!): User!
-  getUserId(login: String!): User!
-  users: [User!]!
-  getPoster(posterPath: String!): String!
-  getMovieData(movieId: Float!): String!
-  getGenres: String!
-  getMoviesList(filterSetting: FilterSettingInput!): String!
-  favoriteGenre(genreId: Float!): FavoriteGenre!
-  favoriteGenres: [FavoriteGenre!]!
+type Genre {
+  id: Float!
+  name: String!
 }
 
-input FilterSettingInput {
+type MovieData {
+  id: Float!
+  title: String!
+  overview: String!
+  poster_path: String!
+}
+
+type Query {
+  user: User!
+  getUserId(login: String!): User!
+  users: [User!]!
+  getGenres: [Genre!]!
+  getMovieData(movieId: String!): MovieData!
+  getSearchingMoviesList(searchingSettings: SettingInput!): [MovieData!]!
+  favoriteMovie(movieId: Float!): FavoriteMovie!
+  favoriteMoviesList: [FavoriteMovie!]!
+  favoriteGenre(genreId: Float!): FavoriteGenre!
+  favoriteGenresList: [FavoriteGenre!]!
+}
+
+input SettingInput {
   page: Float!
   year: Float!
   rating: Float!
@@ -53,9 +66,9 @@ type Mutation {
   addUser(newUser: NewUserInput!): User!
   signIn(userData: SignInRequest!): AuthResponse!
   removeFavoriteMovie(movieId: Float!): Boolean!
-  addFavoriteMovie(newFavoriteMovie: Float!, userId: String!): FavoriteMovie!
+  addFavoriteMovie(newFavoriteMovie: Float!): FavoriteMovie!
   removeFavoriteGenre(genreId: Float!): Boolean!
-  addFavoriteGenre(newFavoriteGenre: Float!, userId: String!): FavoriteGenre!
+  addFavoriteGenre(newFavoriteGenre: Float!): FavoriteGenre!
 }
 
 input NewUserInput {

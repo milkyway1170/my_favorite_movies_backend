@@ -2,17 +2,20 @@ import { NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { User } from 'src/entities/user.entity';
+import { CurrentUser } from 'src/guard/current-user';
 import { GqlAuthGuard } from 'src/guard/gql-auth-guard';
+import { JwtPayload } from 'src/sign-in/dto/sign-in.output';
 import { UserService } from 'src/user/user.service';
-import { NewUserInput } from './dto/new-user.input';
+import { NewUserInput } from './dto/user.input';
 
 @Resolver((of) => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Query((returns) => User)
-  async user(@Args('id') id: string): Promise<User> {
-    return this.userService.findById(id);
+  async user(@CurrentUser() user: JwtPayload): Promise<User> {
+    return this.userService.findById(user.id);
   }
 
   @Query((returns) => User)
