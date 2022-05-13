@@ -6,15 +6,14 @@ import { FavoriteGenreService } from 'src/favorite-genre/favorite-genre.service'
 import { CurrentUser } from 'src/guard/current-user';
 import { GqlAuthGuard } from 'src/guard/gql-auth-guard';
 import { JwtPayload } from 'src/sign-in/dto/sign-in.output';
+import { GenreDataInput } from './dto/favorite-genre.input';
 
 @Resolver((of) => FavoriteGenre)
 export class FavoriteGenreResolver {
   constructor(private readonly favoriteGenreService: FavoriteGenreService) {}
 
   @Query((returns) => FavoriteGenre)
-  async favoriteGenre(
-    @Args('genreId') genreId: number,
-  ): Promise<FavoriteGenre> {
+  favoriteGenre(@Args('genreId') genreId: number): Promise<FavoriteGenre> {
     return this.favoriteGenreService.findOne(genreId);
   }
 
@@ -27,20 +26,13 @@ export class FavoriteGenreResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation((returns) => Boolean)
-  async removeFavoriteGenre(
-    @Args('genreId') genreId: number,
+  @Mutation((returns) => String)
+  async deleteOrInsertGenre(
+    @Args('genreData') { genreId, isFavorite }: GenreDataInput,
     @CurrentUser() user: JwtPayload,
-  ) {
-    return this.favoriteGenreService.remove(genreId, user.id);
-  }
-
-  @UseGuards(GqlAuthGuard)
-  @Mutation((returns) => FavoriteGenre)
-  async addFavoriteGenre(
-    @Args('newFavoriteGenre') newFavoriteGenre: number,
-    @CurrentUser() user: JwtPayload,
-  ): Promise<FavoriteGenre> {
-    return this.favoriteGenreService.add(newFavoriteGenre, user.id);
+  ): Promise<String> {
+    if (isFavorite)
+      return await this.favoriteGenreService.remove(genreId, user.id);
+    else return await this.favoriteGenreService.add(genreId, user.id);
   }
 }

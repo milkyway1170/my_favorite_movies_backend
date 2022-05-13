@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
-import { Genre, MovieData, PosterPath } from './dto/movieDB.output';
-import { FilterSettingInput, SettingInput } from './dto/movieDB.input';
-import { isNotEmpty } from 'class-validator';
+import { Genre, MovieData } from './dto/movieDB.output';
+import { SettingInput } from './dto/movieDB.input';
 
 @Injectable()
 export class MovieDBService {
@@ -44,9 +43,11 @@ export class MovieDBService {
       filterUrlPart += '&vote_average.gte=' + rating.toString();
     }
     if (genres) {
-      filterUrlPart += '&with_genres=';
-      genres.forEach((genre) => (filterUrlPart += genre + '%2C%20'));
+      filterUrlPart += '&with_genres=[';
+      genres.forEach((genre) => (filterUrlPart += ',' + genre));
+      filterUrlPart += ']';
     }
+
     const response = await this.movieDBClient.get(
       (process.env.API_GET_DISCOVER ?? '') +
         (process.env.API_KEY ?? '') +

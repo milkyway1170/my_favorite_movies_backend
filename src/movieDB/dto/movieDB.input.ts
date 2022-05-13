@@ -28,7 +28,6 @@ export class SettingInput {
   @Field()
   rating: number;
 
-  @Type(() => String)
-  @Field(() => [String])
-  genres: string[];
+  @Field(() => [Number])
+  genres: number[];
 }

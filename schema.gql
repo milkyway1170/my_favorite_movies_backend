@@ -39,7 +39,7 @@ type MovieData {
   id: Float!
   title: String!
   overview: String!
-  poster_path: String!
+  posterPath: String!
 }
 
 type Query {
@@ -59,16 +59,15 @@ input SettingInput {
   page: Float!
   year: Float!
   rating: Float!
-  genres: [String!]!
+  genres: [Float!]!
 }
 
 type Mutation {
   addUser(newUser: NewUserInput!): User!
   signIn(userData: SignInRequest!): AuthResponse!
-  removeFavoriteMovie(movieId: Float!): Boolean!
-  addFavoriteMovie(newFavoriteMovie: Float!): FavoriteMovie!
-  removeFavoriteGenre(genreId: Float!): Boolean!
-  addFavoriteGenre(newFavoriteGenre: Float!): FavoriteGenre!
+  removeFavoriteMovie(movieId: Float!): String!
+  deleteOrInsertMovie(movieData: MovieDataInput!): String!
+  deleteOrInsertGenre(genreData: GenreDataInput!): String!
 }
 
 input NewUserInput {
@@ -79,4 +78,14 @@ input NewUserInput {
 input SignInRequest {
   login: String!
   password: String!
+}
+
+input MovieDataInput {
+  movieId: Float!
+  isFavorite: Boolean!
+}
+
+input GenreDataInput {
+  genreId: Float!
+  isFavorite: Boolean!
 }

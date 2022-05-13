@@ -2,7 +2,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { MovieDBService } from 'src/movieDB/movieDB.service';
 import { SettingInput } from './dto/movieDB.input';
-import { Genre, MovieData, PosterPath } from './dto/movieDB.output';
+import { Genre, MovieData } from './dto/movieDB.output';
 
 @Resolver()
 export class MovieDBResolver {
