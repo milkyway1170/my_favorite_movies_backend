@@ -24,20 +24,20 @@ export class FavoriteGenreService {
     return favoriteGenre;
   }
 
-  async remove(genreId: number, userId: string): Promise<string> {
+  async remove(genreId: number, userId: string): Promise<number> {
     await this.favoriteGenresIdRepository.delete({
       genreId: genreId,
       userId: userId,
     });
-    return await userId;
+    return await genreId;
   }
 
-  async add(genreId: number, userId: string): Promise<string> {
+  async add(genreId: number, userId: string): Promise<number> {
     const genreList = new FavoriteGenre();
     genreList.genreId = genreId;
     genreList.userId = userId;
     await genreList.save();
 
-    return await userId;
+    return await genreId;
   }
 }

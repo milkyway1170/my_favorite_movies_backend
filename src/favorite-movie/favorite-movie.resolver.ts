@@ -28,7 +28,7 @@ export class FavoriteMovieResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation((returns) => String)
+  @Mutation((returns) => Number)
   async removeFavoriteMovie(
     @Args('movieId') movieId: number,
     @CurrentUser() user: JwtPayload,
@@ -37,11 +37,11 @@ export class FavoriteMovieResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation((returns) => String)
+  @Mutation((returns) => Number)
   async deleteOrInsertMovie(
     @Args('movieData') { movieId, isFavorite }: MovieDataInput,
     @CurrentUser() user: JwtPayload,
-  ): Promise<String> {
+  ): Promise<Number> {
     if (isFavorite)
       return await this.favoriteMovieService.remove(movieId, user.id);
     else return await this.favoriteMovieService.add(movieId, user.id);

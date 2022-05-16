@@ -26,11 +26,11 @@ export class FavoriteGenreResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation((returns) => String)
+  @Mutation((returns) => Number)
   async deleteOrInsertGenre(
     @Args('genreData') { genreId, isFavorite }: GenreDataInput,
     @CurrentUser() user: JwtPayload,
-  ): Promise<String> {
+  ): Promise<Number> {
     if (isFavorite)
       return await this.favoriteGenreService.remove(genreId, user.id);
     else return await this.favoriteGenreService.add(genreId, user.id);

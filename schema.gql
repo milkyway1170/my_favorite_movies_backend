@@ -65,9 +65,9 @@ input SettingInput {
 type Mutation {
   addUser(newUser: NewUserInput!): User!
   signIn(userData: SignInRequest!): AuthResponse!
-  removeFavoriteMovie(movieId: Float!): String!
-  deleteOrInsertMovie(movieData: MovieDataInput!): String!
-  deleteOrInsertGenre(genreData: GenreDataInput!): String!
+  removeFavoriteMovie(movieId: Float!): Float!
+  deleteOrInsertMovie(movieData: MovieDataInput!): Float!
+  deleteOrInsertGenre(genreData: GenreDataInput!): Float!
 }
 
 input NewUserInput {

@@ -24,19 +24,19 @@ export class FavoriteMovieService {
     return favoriteMovie;
   }
 
-  async remove(movieId: number, userId: string): Promise<string> {
+  async remove(movieId: number, userId: string): Promise<number> {
     await this.favoriteMoviesIdRepository.delete({
       movieId,
       userId,
     });
-    return await userId;
+    return await movieId;
   }
 
-  async add(movieId: number, userId: string): Promise<string> {
+  async add(movieId: number, userId: string): Promise<number> {
     const movieList = new FavoriteMovie();
     movieList.movieId = movieId;
     movieList.userId = userId;
     await movieList.save();
-    return await userId;
+    return await movieId;
   }
 }
