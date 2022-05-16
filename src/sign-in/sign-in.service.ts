@@ -2,8 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from 'src/entities/user.entity';
-import { AuthResponse, SignInRequest } from '../sign-in/dto/sign-in.input';
+import { SignInRequest } from '../sign-in/dto/sign-in.input';
 import { UserService } from 'src/user/user.service';
+import { AuthResponse } from './dto/sign-in.output';
 
 @Injectable()
 export default class SignInService {
@@ -14,9 +15,9 @@ export default class SignInService {
     private userService: UserService,
   ) {}
 
-  async process(userData: SignInRequest): Promise<AuthResponse> {
+  async login(userData: SignInRequest): Promise<AuthResponse> {
     const { id, login, password } = await this.userService.findByLogin(
-      userData.login.trim(),
+      userData.login,
     );
 
     const payload = {

@@ -1,5 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { SignInRequest, AuthResponse } from './dto/sign-in.input';
+import { AuthResponse } from './dto/sign-in.output';
+import { SignInRequest } from './dto/sign-in.input';
 import SignInService from './sign-in.service';
 
 @Resolver()
@@ -10,6 +11,6 @@ export class SignInResolver {
   async signIn(
     @Args('userData') userData: SignInRequest,
   ): Promise<AuthResponse> {
-    return this.signInService.process(userData);
+    return this.signInService.login(userData);
   }
 }

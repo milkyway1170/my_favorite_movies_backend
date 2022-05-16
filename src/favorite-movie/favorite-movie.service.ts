@@ -12,8 +12,8 @@ export class FavoriteMovieService {
     private favoriteMoviesIdRepository: Repository<FavoriteMovie>,
   ) {}
 
-  findAll(): Promise<FavoriteMovie[]> {
-    return this.favoriteMoviesIdRepository.find();
+  findAll(userId: string): Promise<FavoriteMovie[]> {
+    return this.favoriteMoviesIdRepository.find({ userId });
   }
 
   findOne(movieId: number): Promise<FavoriteMovie> {
@@ -24,14 +24,19 @@ export class FavoriteMovieService {
     return favoriteMovie;
   }
 
-  async remove(movieId: number): Promise<void> {
-    await this.favoriteMoviesIdRepository.delete(movieId);
+  async remove(movieId: number, userId: string): Promise<number> {
+    await this.favoriteMoviesIdRepository.delete({
+      movieId,
+      userId,
+    });
+    return await movieId;
   }
 
-  async add(movieId: number, userId: string): Promise<FavoriteMovie> {
+  async add(movieId: number, userId: string): Promise<number> {
     const movieList = new FavoriteMovie();
     movieList.movieId = movieId;
     movieList.userId = userId;
-    return await movieList.save();
+    await movieList.save();
+    return await movieId;
   }
 }

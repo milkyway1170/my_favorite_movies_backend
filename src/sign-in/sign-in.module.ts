@@ -8,6 +8,7 @@ import SignInService from './sign-in.service';
 import JwtModule from 'jwt-module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
+import { JwtStrategy } from './sign-in-jwt.strategy';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { User } from 'src/entities/user.entity';
     JwtModule,
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [SignInService, UserService, SignInResolver],
+  providers: [SignInService, UserService, SignInResolver, JwtStrategy],
 })
 export class SignInModule {}

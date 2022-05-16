@@ -1,10 +1,10 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class SignInRequest {
+export class GenreDataInput {
   @Field()
-  login: string;
+  genreId: number;
 
   @Field()
-  password: string;
+  isFavorite: boolean;
 }
