@@ -20,6 +20,6 @@ export class MovieData {
   @Field()
   overview: string;
 
-  @Field({ name: 'posterPath' })
+  @Field({ name: 'posterPath', nullable: true })
   poster_path: string;
 }

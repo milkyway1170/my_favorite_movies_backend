@@ -24,12 +24,12 @@ export class UserService {
     return user;
   }
 
-  findByLogin(login: string): Promise<User> {
+  async findByLogin(login: string): Promise<User> {
     const user = this.usersRepository.findOne({ login });
     if (!user) {
       throw new NotFoundException(login);
     }
-    return user;
+    return await user;
   }
 
   async remove(userId: string): Promise<void> {

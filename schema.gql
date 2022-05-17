@@ -39,7 +39,7 @@ type MovieData {
   id: Float!
   title: String!
   overview: String!
-  posterPath: String!
+  posterPath: String
 }
 
 type Query {
