@@ -16,15 +16,14 @@ export default class SignInService {
   ) {}
 
   async login(userData: SignInRequest): Promise<AuthResponse> {
-    const { id, login, password } = await this.userService.findByLogin(
-      userData.login,
-    );
+    const response = await this.userService.findByLogin(userData.login);
 
-    const payload = {
-      id,
-      login,
-    };
-    if (login && userData.password === password) {
+    if (response && response.login && userData.password === response.password) {
+      const payload = {
+        id: response.id,
+        login: response.login,
+      };
+
       return {
         token: this.jwtService.sign({
           ...payload,

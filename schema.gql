@@ -6,6 +6,7 @@ type FavoriteMovie {
   id: String!
   userId: String!
   movieId: Float!
+  isWatched: Boolean!
 }
 
 type User {
@@ -39,7 +40,7 @@ type MovieData {
   id: Float!
   title: String!
   overview: String!
-  posterPath: String!
+  posterPath: String
 }
 
 type Query {
@@ -49,9 +50,7 @@ type Query {
   getGenres: [Genre!]!
   getMovieData(movieId: String!): MovieData!
   getSearchingMoviesList(searchingSettings: SettingInput!): [MovieData!]!
-  favoriteMovie(movieId: Float!): FavoriteMovie!
   favoriteMoviesList: [FavoriteMovie!]!
-  favoriteGenre(genreId: Float!): FavoriteGenre!
   favoriteGenresList: [FavoriteGenre!]!
 }
 
@@ -66,6 +65,7 @@ type Mutation {
   addUser(newUser: NewUserInput!): User!
   signIn(userData: SignInRequest!): AuthResponse!
   removeFavoriteMovie(movieId: Float!): Float!
+  changeWatchedStatus(movieId: Float!): FavoriteMovie!
   deleteOrInsertMovie(movieData: MovieDataInput!): Float!
   deleteOrInsertGenre(genreData: GenreDataInput!): Float!
 }

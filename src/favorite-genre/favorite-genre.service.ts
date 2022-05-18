@@ -16,14 +16,6 @@ export class FavoriteGenreService {
     return await this.favoriteGenresIdRepository.find({ userId: userId });
   }
 
-  findOne(genreId: number): Promise<FavoriteGenre> {
-    const favoriteGenre = this.favoriteGenresIdRepository.findOne({ genreId });
-    if (!favoriteGenre) {
-      throw new NotFoundException(genreId);
-    }
-    return favoriteGenre;
-  }
-
   async remove(genreId: number, userId: string): Promise<number> {
     await this.favoriteGenresIdRepository.delete({
       genreId: genreId,

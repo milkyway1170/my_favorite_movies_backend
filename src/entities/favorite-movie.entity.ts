@@ -25,6 +25,10 @@ export class FavoriteMovie extends BaseEntity {
   @Field(() => Number)
   movieId: number;
 
+  @Column({ name: 'is_watched' })
+  @Field(() => Boolean)
+  isWatched: boolean;
+
   @ManyToOne(() => User, (user) => user.movieList)
   @JoinColumn({ name: 'user_id' })
   user: User;

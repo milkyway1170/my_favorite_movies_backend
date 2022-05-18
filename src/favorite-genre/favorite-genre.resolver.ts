@@ -12,11 +12,6 @@ import { GenreDataInput } from './dto/favorite-genre.input';
 export class FavoriteGenreResolver {
   constructor(private readonly favoriteGenreService: FavoriteGenreService) {}
 
-  @Query((returns) => FavoriteGenre)
-  favoriteGenre(@Args('genreId') genreId: number): Promise<FavoriteGenre> {
-    return this.favoriteGenreService.findOne(genreId);
-  }
-
   @UseGuards(GqlAuthGuard)
   @Query((returns) => [FavoriteGenre])
   favoriteGenresList(

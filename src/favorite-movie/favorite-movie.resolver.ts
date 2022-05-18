@@ -12,13 +12,6 @@ import { MovieDataInput } from './dto/favorite-movie.input';
 export class FavoriteMovieResolver {
   constructor(private readonly favoriteMovieService: FavoriteMovieService) {}
 
-  @Query((returns) => FavoriteMovie)
-  async favoriteMovie(
-    @Args('movieId') movieId: number,
-  ): Promise<FavoriteMovie> {
-    return this.favoriteMovieService.findOne(movieId);
-  }
-
   @UseGuards(GqlAuthGuard)
   @Query((returns) => [FavoriteMovie])
   favoriteMoviesList(
@@ -37,6 +30,15 @@ export class FavoriteMovieResolver {
   }
 
   @UseGuards(GqlAuthGuard)
+  @Mutation((returns) => FavoriteMovie)
+  async changeWatchedStatus(
+    @Args('movieId') movieId: number,
+    @CurrentUser() user: JwtPayload,
+  ) {
+    return await this.favoriteMovieService.edite(movieId, user.id);
+  }
+
+  @UseGuards(GqlAuthGuard)
   @Mutation((returns) => Number)
   async deleteOrInsertMovie(
     @Args('movieData') { movieId, isFavorite }: MovieDataInput,
@@ -44,6 +46,9 @@ export class FavoriteMovieResolver {
   ): Promise<Number> {
     if (isFavorite)
       return await this.favoriteMovieService.remove(movieId, user.id);
-    else return await this.favoriteMovieService.add(movieId, user.id);
+    else {
+      const isWatched = false;
+      return await this.favoriteMovieService.add(movieId, user.id, isWatched);
+    }
   }
 }

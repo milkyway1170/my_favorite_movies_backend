@@ -13,15 +13,24 @@ export class FavoriteMovieService {
   ) {}
 
   findAll(userId: string): Promise<FavoriteMovie[]> {
-    return this.favoriteMoviesIdRepository.find({ userId });
+    return this.favoriteMoviesIdRepository.find({
+      order: { movieId: 'DESC', id: 'DESC' },
+      where: { userId },
+    });
   }
 
-  findOne(movieId: number): Promise<FavoriteMovie> {
-    const favoriteMovie = this.favoriteMoviesIdRepository.findOne({ movieId });
+  async edite(movieId: number, userId: string): Promise<FavoriteMovie> {
+    const favoriteMovie = await this.favoriteMoviesIdRepository.findOne({
+      movieId,
+      userId,
+    });
+
     if (!favoriteMovie) {
       throw new NotFoundException(movieId);
     }
-    return favoriteMovie;
+    favoriteMovie.isWatched = !favoriteMovie.isWatched;
+    await favoriteMovie.save();
+    return await favoriteMovie;
   }
 
   async remove(movieId: number, userId: string): Promise<number> {
@@ -32,10 +41,15 @@ export class FavoriteMovieService {
     return await movieId;
   }
 
-  async add(movieId: number, userId: string): Promise<number> {
+  async add(
+    movieId: number,
+    userId: string,
+    isWatched: boolean,
+  ): Promise<number> {
     const movieList = new FavoriteMovie();
     movieList.movieId = movieId;
     movieList.userId = userId;
+    movieList.isWatched = isWatched;
     await movieList.save();
     return await movieId;
   }
