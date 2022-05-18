@@ -24,7 +24,7 @@ export class FavoriteMovieService {
       movieId,
       userId,
     });
-    console.log('\n\n\n\n\n\nedite');
+
     if (!favoriteMovie) {
       throw new NotFoundException(movieId);
     }

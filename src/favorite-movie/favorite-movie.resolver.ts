@@ -35,7 +35,6 @@ export class FavoriteMovieResolver {
     @Args('movieId') movieId: number,
     @CurrentUser() user: JwtPayload,
   ) {
-    console.log('\n\n\n\n\n\n\nchangeWatchedStatus');
     return await this.favoriteMovieService.edite(movieId, user.id);
   }
 
