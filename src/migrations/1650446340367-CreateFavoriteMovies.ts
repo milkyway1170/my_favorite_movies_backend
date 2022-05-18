@@ -20,6 +20,11 @@ export class CreateFavoriteMovies1650446340367 implements MigrationInterface {
         type: 'integer',
         isNullable: false,
       },
+      {
+        name: 'is_watched',
+        type: 'boolean',
+        isNullable: false,
+      },
     ],
   });
 
